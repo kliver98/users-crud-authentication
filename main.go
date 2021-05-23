@@ -71,7 +71,7 @@ func (main *Main) Router() *mux.Router {
 }
 
 func main() {
-	godotenv.Load(".env.development.local")
+	godotenv.Load(".env.local")
 	app := Init()
 	port := os.Getenv("PORT")
 	if port == "" {
