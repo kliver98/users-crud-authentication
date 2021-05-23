@@ -19,7 +19,7 @@ import (
 var ENDPOINT string = "/api/latest/"
 
 func (app *Main) indexRoute(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "users-crud-back service for authentication")
+	fmt.Fprintf(w, "users-crud-authentication service for authentication")
 }
 
 func (app *Main) authenticate(w http.ResponseWriter, r *http.Request) {
