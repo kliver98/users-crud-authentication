@@ -23,6 +23,11 @@ func (app *Main) indexRoute(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *Main) authenticate(w http.ResponseWriter, r *http.Request) {
+	setupCorsResponse(&w, r)
+	if r.Method == "OPTIONS" {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
 	client, err := db.GetConnection()
 	if err != nil {
 		return
@@ -59,7 +64,13 @@ func (main *Main) CreateRoutes() {
 	main.router = router
 
 	router.HandleFunc(ENDPOINT, main.indexRoute)
-	router.HandleFunc(ENDPOINT+"users/auth/", main.authenticate).Methods("POST")
+	router.HandleFunc(ENDPOINT+"users/auth/", main.authenticate).Methods(http.MethodPost, http.MethodOptions)
+}
+
+func setupCorsResponse(w *http.ResponseWriter, req *http.Request) {
+	(*w).Header().Add("Access-Control-Allow-Origin", "*")
+	(*w).Header().Add("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+	(*w).Header().Add("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
 }
 
 type Main struct {
