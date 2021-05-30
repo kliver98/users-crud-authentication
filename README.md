@@ -44,3 +44,14 @@ If you have altered it, you then need to rebase it.
   git rebase upstream/main
 ````
 
+## How to run Tests ?
+
+1. Contract Test:
+```
+go test -v ./test/contract/api
+```
+or if you have installed make
+```
+make provider
+```
+*Note: You need _**.env.development.local**_ file where are setted variables to correct run. These are PACT_BROKER_BASE_URL, PACT_BROKER_TOKEN, API (localhost where client will start with port) and MONGODB_URL for connection with database. This file will be send to you if collaborate on this project (if not sent yet, [message me](mailto:kliver1998@gmail.com)), other wise you must create and set your own variables.

@@ -15,3 +15,7 @@
 # vendor/
 
 /*.env.*
+
+# To run contract test & ignore files and folder created
+make
+test/contract/api/log
