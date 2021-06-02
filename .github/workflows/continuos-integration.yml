@@ -20,9 +20,10 @@ jobs:
         go-version: '^1.16.4'
     - run: go mod download
     - name: Downloading updated tools for pact 
-      run: cd /opt && curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash && export PATH=$PATH:/opt/pact/bin && go get -d github.com/pact-foundation/pact-go && cd ..
+      run: curl -LO https://github.com/pact-foundation/pact-ruby-standalone/releases/download/v1.88.53/pact-1.88.53-linux-x86_64.tar.gz && tar xzf pact-1.88.53-linux-x86_64.tar.gz && cd pact/bin && ./pact-mock-service --help start && ./pact-provider-verifier --help verify
     - name: Run contract test
       env:
+        PACT_DISABLE_TOOL_VALIDITY_CHECK: 1
         API: http://localhost:3001
         MONGODB_URL: ${{ secrets.MONGODB_URL }}
         PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
