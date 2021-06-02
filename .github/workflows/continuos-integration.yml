@@ -18,10 +18,16 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: '^1.16.4'
+    - name: Downloading updated tools for pact 
+      run: curl -LO https://github.com/pact-foundation/pact-ruby-standalone/releases/download/v1.88.53/pact-1.88.53-linux-x86_64.tar.gz
+      run: tar xzf pact-1.88.53-linux-x86_64.tar.gz
+      run: cd pact/bin
+      run: ./pact-mock-service --help start
+      run: ./pact-provider-verifier --help verify
     - run: go mod download
     - name: Run contract test
       env:
-        API: http://localhost:3000
+        API: http://localhost:3001
         MONGODB_URL: ${{ secrets.MONGODB_URL }}
         PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
         PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
