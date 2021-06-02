@@ -1,4 +1,4 @@
-package model
+package received
 
 //Struct that represents a User Object for json response of API
 type User struct {
