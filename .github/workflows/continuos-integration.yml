@@ -20,7 +20,7 @@ jobs:
         go-version: '^1.16.4'
     - run: go mod download
     - name: Downloading updated tools for pact 
-      run: curl -LO https://github.com/pact-foundation/pact-ruby-standalone/releases/download/v1.88.53/pact-1.88.53-linux-x86_64.tar.gz && tar xzf pact-1.88.53-linux-x86_64.tar.gz && cd pact/bin && ./pact-mock-service --help start && ./pact-provider-verifier --help verify
+      run: curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash
     - name: Run contract test
       env:
         API: http://localhost:3001
